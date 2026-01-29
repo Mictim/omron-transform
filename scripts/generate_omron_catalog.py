@@ -22,8 +22,17 @@ def parse_price(price_str):
         
     Returns:
         float: Parsed price value
+        
+    Raises:
+        ValueError: If the price string is invalid or empty
     """
-    return float(price_str.replace(',', '.'))
+    if not price_str or not price_str.strip():
+        raise ValueError("Price string is empty or None")
+    
+    try:
+        return float(price_str.replace(',', '.'))
+    except ValueError as e:
+        raise ValueError(f"Invalid price format: '{price_str}'") from e
 
 
 def read_omron_csv(csv_path):
@@ -35,21 +44,52 @@ def read_omron_csv(csv_path):
         
     Returns:
         list: List of dictionaries containing article data
+        
+    Raises:
+        ValueError: If CSV is missing required columns or has invalid data
     """
     articles = []
+    required_columns = {'articleId', 'alias', 'price'}
     
     with open(csv_path, 'r', encoding='utf-8') as csvfile:
         # Use semicolon as delimiter
         reader = csv.DictReader(csvfile, delimiter=';')
         
-        for row in reader:
-            # Parse each row into the required schema
-            article = {
-                "articleId": row['articleId'].strip(),
-                "alias": row['alias'].strip(),
-                "price": parse_price(row['price'].strip())
-            }
-            articles.append(article)
+        # Validate that required columns exist
+        if not reader.fieldnames:
+            raise ValueError("CSV file is empty or has no header")
+        
+        missing_columns = required_columns - set(reader.fieldnames)
+        if missing_columns:
+            raise ValueError(f"CSV is missing required columns: {', '.join(missing_columns)}")
+        
+        for row_num, row in enumerate(reader, start=2):  # start=2 accounts for header row
+            # Skip empty rows
+            if not any(row.values()) or all(not v.strip() for v in row.values()):
+                continue
+            
+            # Validate required fields are present
+            if not row.get('articleId', '').strip():
+                print(f"Warning: Skipping row {row_num} - missing articleId")
+                continue
+            if not row.get('alias', '').strip():
+                print(f"Warning: Skipping row {row_num} - missing alias")
+                continue
+            if not row.get('price', '').strip():
+                print(f"Warning: Skipping row {row_num} - missing price")
+                continue
+            
+            try:
+                # Parse each row into the required schema
+                article = {
+                    "articleId": row['articleId'].strip(),
+                    "alias": row['alias'].strip(),
+                    "price": parse_price(row['price'].strip())
+                }
+                articles.append(article)
+            except ValueError as e:
+                print(f"Warning: Skipping row {row_num} - {e}")
+                continue
     
     return articles
 
