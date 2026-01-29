@@ -1,0 +1,32 @@
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Keep the output directory but ignore specific patterns if needed
+# output/*.tmp
