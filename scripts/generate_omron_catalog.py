@@ -8,7 +8,6 @@ and produces a JSON catalog file with all article information.
 
 import csv
 import json
-import os
 import sys
 from pathlib import Path
 
@@ -64,8 +63,8 @@ def read_omron_csv(csv_path):
             raise ValueError(f"CSV is missing required columns: {', '.join(missing_columns)}")
         
         for row_num, row in enumerate(reader, start=2):  # start=2 accounts for header row
-            # Skip empty rows
-            if not any(row.values()) or all(not v.strip() for v in row.values()):
+            # Skip empty rows (handle None values safely)
+            if not any(row.values()) or all(not v or not v.strip() for v in row.values()):
                 continue
             
             # Validate required fields are present
@@ -99,11 +98,15 @@ def generate_catalog(csv_path, output_path):
     Generate the JSON catalog from the CSV file.
     
     Args:
-        csv_path: Path to the input CSV file
-        output_path: Path to the output JSON file
+        csv_path: Path to the input CSV file (str or Path)
+        output_path: Path to the output JSON file (str or Path)
     """
+    # Convert to Path objects for consistency
+    csv_path = Path(csv_path)
+    output_path = Path(output_path)
+    
     # Ensure output directory exists
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     
     # Read and parse CSV
     print(f"Reading CSV file: {csv_path}")
