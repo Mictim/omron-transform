@@ -28,5 +28,4 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-# Keep the output directory but ignore specific patterns if needed
-# output/*.tmp
+# Example: output/*.tmp
