@@ -1,0 +1,52 @@
+[
+  {
+    "articleId": "OMR001",
+    "alias": "Omron E3Z-D82 Photoelectric Sensor",
+    "price": 45.99
+  },
+  {
+    "articleId": "OMR002",
+    "alias": "Omron E3FA-DN11 Sensor",
+    "price": 32.5
+  },
+  {
+    "articleId": "OMR003",
+    "alias": "Omron CJ2M-CPU35 PLC Controller",
+    "price": 850.0
+  },
+  {
+    "articleId": "OMR004",
+    "alias": "Omron E2E-X5ME2 Proximity Sensor",
+    "price": 28.75
+  },
+  {
+    "articleId": "OMR005",
+    "alias": "Omron CP1E-N30DR-A Programmable Controller",
+    "price": 425.99
+  },
+  {
+    "articleId": "OMR006",
+    "alias": "Omron H3CR-A8 Timer Relay",
+    "price": 65.5
+  },
+  {
+    "articleId": "OMR007",
+    "alias": "Omron MY4N-D2-DC24 Power Relay",
+    "price": 18.25
+  },
+  {
+    "articleId": "OMR008",
+    "alias": "Omron E3X-DA11-S Fiber Amplifier",
+    "price": 125.0
+  },
+  {
+    "articleId": "OMR009",
+    "alias": "Omron G9SA-321-T075 Safety Relay",
+    "price": 198.99
+  },
+  {
+    "articleId": "OMR010",
+    "alias": "Omron ZEN-10C4AR-A-V2 Logic Module",
+    "price": 145.0
+  }
+]
