@@ -1,0 +1,31 @@
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Example: output/*.tmp
